@@ -1,0 +1,9 @@
+---
+- hosts: localhost
+  gather_facts: yes
+  module_defaults:
+    group/k8s:
+      host: "{{ ocp_url }}"
+      verify_ssl: false
+  roles:
+    - ocp

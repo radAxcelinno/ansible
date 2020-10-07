@@ -1,0 +1,16 @@
+---
+- name: Log in (obtain access token)
+  k8s_auth:
+    username: "{{ ocp_user }}"
+    password: "{{ ocp_password }}"
+  register: k8s_auth_results
+
+- name: Check or Create a namespace
+  k8s:
+    name: pgo-v2
+    username: "{{ ocp_user }}"
+    password: "{{ ocp_password }}"
+    api_key: "{{ k8s_auth_results.k8s_auth.api_key }}"
+    api_version: v1
+    kind: Namespace
+    state: present
